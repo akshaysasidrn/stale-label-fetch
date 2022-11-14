@@ -1,0 +1,21 @@
+name: "Stale label fetch"
+description: "GitHub action to fetch PRs/Issues with stale labels"
+inputs:
+  github-token:
+    description: 'Github token'
+    required: true
+  stale-label:
+    description: "Label to check whether it's stale"
+    required: true
+  stale-time-in-seconds:
+    description: "Seconds since issue creation to be considered as stale"
+    required: true
+  type:
+    description: "Specify either as 'pull-request' or 'issue'"
+    required: true
+outputs:
+  stale-numbers:
+    description: 'Comma separated number values for corresponding PRs or Issues'
+runs:
+  using: 'node16'
+  main: 'index.js'
