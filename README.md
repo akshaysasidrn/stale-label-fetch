@@ -40,4 +40,5 @@ with:
   github-token: 'xxxxxx'
   stale-label: 'deployed'
   stale-time: '86400'
+  type: 'pull_request'
 ```
