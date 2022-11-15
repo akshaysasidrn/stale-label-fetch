@@ -4,9 +4,11 @@ jobs:
   stale:
     runs-on: ubuntu-latest
     steps:
-    - uses: akshaysasidrn/stale-label-fetch@v1.0
+    - name: Checkout
+      uses: actions/checkout@v3
+    - uses: ./
+      id: stale-label
       with:
-        id: stale-label
         github-token: ${{ secrets.GITHUB_TOKEN }}
         stale-label: 'active-review-app'
         stale-time: '1'
