@@ -7,15 +7,15 @@ inputs:
   stale-label:
     description: "Label to check whether it's stale"
     required: true
-  stale-time-in-seconds:
+  stale-time:
     description: "Seconds since issue creation to be considered as stale"
     required: true
   type:
-    description: "Specify either as 'pull-request' or 'issue'"
+    description: "Specify either as 'pull_request' or 'issue'"
     required: true
 outputs:
   stale-numbers:
     description: 'Comma separated number values for corresponding PRs or Issues'
 runs:
   using: 'node16'
-  main: 'dist/index.js'
+  main: 'index.js'

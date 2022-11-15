@@ -6,8 +6,19 @@ const isStale = (currentTime, createdTime, staleTime) => {
 };
 
 const getTimeinSeconds = (timeString) => {
-  const dateObj = timeString ? new Date(timeString) : new Date()
+  const dateObj = timeString ? new Date(timeString) : new Date();
   return dateObj.getTime() / 1000;
+};
+
+const hasSpecifiedType = (obj, type) => {
+  switch (type) {
+    case "pull_request":
+      return obj.hasOwnProperty(type);
+    case "issue":
+      return !obj.hasOwnProperty(type);
+    default:
+      return false;
+  }
 };
 
 const run = async () => {
@@ -16,18 +27,21 @@ const run = async () => {
     const client = new github.getOctokit(token);
     const type = core.getInput("type");
     const staleLabel = core.getInput("stale-label");
-    const queryString = `q=is:${type} label:${staleLabel} is:open`;
-    const currentTime = getTimeinSeconds();
     const staleTimeInSeconds = parseInt(core.getInput("stale-time"), 10);
+    const currentTime = getTimeinSeconds();
 
     const openIssuesOrPullRequestsWithLabel = await client.paginate(
-      client.rest.search.issuesAndPullRequests,
+      client.rest.issues.listForRepo,
       {
-        q: queryString,
+        ...github.context.repo,
+        labels: staleLabel,
         per_page: 100,
       }
     );
-    const labelNumbers = openIssuesOrPullRequestsWithLabel.reduce(
+    const specifiedTypeWithLabels = openIssuesOrPullRequestsWithLabel.filter(
+      (obj) => hasSpecifiedType(obj, type)
+    );
+    const labelNumbers = specifiedTypeWithLabels.reduce(
       (acc, resp) => [...acc, resp.number],
       []
     );
@@ -42,10 +56,10 @@ const run = async () => {
       );
 
       const lastLabeledEvent = eventsResponse.filter(
-        (resp) => resp.event === "labeled" && resp.label.name === "duplicate"
+        (resp) => resp.event === "labeled" && resp.label.name === staleLabel
       )[0];
 
-      return [...(await acc), {...lastLabeledEvent, number }];
+      return [...(await acc), { ...lastLabeledEvent, number }];
     }, []);
 
     const staleIssueOrPullRequestNumbers = lastLabeledEvents

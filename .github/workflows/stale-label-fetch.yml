@@ -1,0 +1,17 @@
+on: [push]
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - uses: ./
+      id: stale-label
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        stale-label: 'bug'
+        stale-time: '1'
+        type: 'pull_request'
+    - name: Get stale numbers
+      run: echo "matched PR number ${{ steps.stale-label.outputs.stale-numbers }}"
