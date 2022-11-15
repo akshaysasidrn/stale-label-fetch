@@ -7,7 +7,7 @@ inputs:
   stale-label:
     description: "Label to check whether it's stale"
     required: true
-  stale-time-in-seconds:
+  stale-time:
     description: "Seconds since issue creation to be considered as stale"
     required: true
   type:
