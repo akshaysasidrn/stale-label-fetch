@@ -12,6 +12,6 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         stale-label: 'bug'
         stale-time: '1'
-        type: 'pull-request'
+        type: 'pull_request'
     - name: Get stale numbers
       run: echo "matched PR number ${{ steps.stale-label.outputs.stale-numbers }}"
