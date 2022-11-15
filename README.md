@@ -27,7 +27,7 @@ Comma separated values of PRs/issues numbers which are stale.
 ## Example usage
 
 ```yaml
-uses: actions/stale-label-fetch-action@v1.0
+uses: actions/stale-label-fetch@v1.0
 with:
   github-token: 'xxxxxx'
   stale-label: 'deployed'
