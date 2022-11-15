@@ -22,7 +22,7 @@ This action helps to fetch PR or issue numbers having the specified label based 
 
 ### `stale-numbers`
 
-The time we greeted you.
+Comma separated values of PRs/issues numbers which are stale.
 
 ## Example usage
 
