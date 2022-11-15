@@ -10,7 +10,7 @@ jobs:
       id: stale-label
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        stale-label: 'active-review-app'
+        stale-label: 'bug'
         stale-time: '1'
         type: 'pull-request'
     - name: Get stale numbers
