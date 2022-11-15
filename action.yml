@@ -18,4 +18,4 @@ outputs:
     description: 'Comma separated number values for corresponding PRs or Issues'
 runs:
   using: 'node16'
-  main: 'dist/index.js'
+  main: 'index.js'
