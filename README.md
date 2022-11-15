@@ -24,7 +24,7 @@ The time difference in seconds required to be considered stale since the PR's/is
 ### `type`
 
 **Required**
-Specify either as 'pull-request' or 'issue'
+Specify either as 'pull_request' or 'issue'
 
 ## Outputs
 
