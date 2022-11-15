@@ -32,6 +32,8 @@ const run = async () => {
       []
     );
 
+    console.log({labelNumbers})
+
     const lastLabeledEvents = await labelNumbers.reduce(async (acc, number) => {
       const eventsResponse = await client.paginate(
         client.rest.issues.listEventsForTimeline,
