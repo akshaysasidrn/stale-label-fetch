@@ -18,7 +18,7 @@ const run = async () => {
     const staleLabel = core.getInput("stale-label");
     const queryString = `q=is:${type} label:${staleLabel} is:open`;
     const currentTime = getTimeinSeconds();
-    const staleTimeInSeconds = parseInt(core.getInput("stale-time-in-seconds"), 10);
+    const staleTimeInSeconds = parseInt(core.getInput("stale-time"), 10);
 
     const openIssuesOrPullRequestsWithLabel = await client.paginate(
       client.rest.search.issuesAndPullRequests,
